@@ -35,7 +35,7 @@ class HomeController extends Controller
     public function timeIn()
     {
         $user             = Auth::user();
-        $checkTimeInExist = UserAttendance::whereDate('timein', Carbon::today())->first();
+        $checkTimeInExist = $user->attendances()->whereDate('timein', Carbon::today())->first();
         if ($checkTimeInExist) {
             session()->flash('error', 'You have already checked in!');
             return back();
